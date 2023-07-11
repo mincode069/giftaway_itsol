@@ -15,8 +15,8 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:gift',
         link: '/apps/employee-manage'
-    }
-    /*{
+    },
+    {
         id: 'dashboards',
         title: 'Dashboards',
         subtitle: 'Unique dashboard designs',
@@ -62,7 +62,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         children: [
             {
                 id: 'apps.gift.manage',
-                title: '\QL Phần thưởng',
+                title: 'QL Phần thưởng',
                 type: 'basic',
                 icon: 'heroicons_outline:gift',
                 link: '/apps/gift-manage'
@@ -1185,7 +1185,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 type: 'basic'
             }
         ]
-    }*/
+    }
 ];
 export const compactNavigation: FuseNavigationItem[] = [
     {
