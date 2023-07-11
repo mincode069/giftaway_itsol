@@ -7,7 +7,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         title: 'Thông tin phần thưởng',
         type: 'basic',
         icon: 'heroicons_outline:gift',
-        link: '/apps/gift-manage'
+        link: 'app-gift-information'
     },
     {
         id: 'apps.employee.manage',

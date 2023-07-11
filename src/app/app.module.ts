@@ -14,6 +14,11 @@ import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {ToastrModule} from 'ngx-toastr';
+import { GiftInformationComponent } from './gift-information/gift-information.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -22,7 +27,8 @@ const routerConfig: ExtraOptions = {
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        GiftInformationComponent
     ],
     imports     : [
         BrowserModule,
@@ -43,6 +49,12 @@ const routerConfig: ExtraOptions = {
         // 3rd party modules that require global configuration via forRoot
         MarkdownModule.forRoot({}),
 
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+
+        FormsModule,
+
         NgxSpinnerModule,
         ToastrModule.forRoot({
             positionClass: 'toast-bottom-right',
@@ -53,6 +65,9 @@ const routerConfig: ExtraOptions = {
     ],
     bootstrap   : [
         AppComponent
+    ],
+    exports: [
+        GiftInformationComponent
     ]
 })
 export class AppModule

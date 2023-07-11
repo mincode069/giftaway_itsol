@@ -1,0 +1,29 @@
+<div class="gift-information">
+    <div class="header">
+        <h2>Thông tin phần thưởng</h2>
+        <mat-icon (click)="close()">close</mat-icon>
+    </div>
+    <div class="content">
+        <mat-form-field>
+            <mat-label>Mã giải thưởng</mat-label>
+            <input matInput [(ngModel)]="giftCode">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Tên giải thưởng</mat-label>
+            <input matInput [(ngModel)]="giftName">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Mô tả</mat-label>
+            <textarea matInput [(ngModel)]="giftDescription"></textarea>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Ảnh phần thưởng</mat-label>
+            <input type="file" (change)="handleImageUpload($event)">
+        </mat-form-field>
+
+        <button mat-button (click)="save()">Lưu</button>
+    </div>
+</div>
