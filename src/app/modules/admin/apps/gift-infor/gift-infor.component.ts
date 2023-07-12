@@ -23,4 +23,12 @@ export class GiftInforComponent {
     save(): void {
         // Logic to save the gift information
     }
+
+    closeDialog() {
+
+    }
+
+    saveAndCloseDialog() {
+
+    }
 }

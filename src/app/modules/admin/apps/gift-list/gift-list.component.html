@@ -9,43 +9,21 @@
             </mat-expansion-panel-header>
             <form class="grid lg:grid-cols-4 sm:grid-cols-2 gap-4" [formGroup]="searchForm">
                 <mat-form-field class="w-full" [floatLabel]="'always'">
-                    <mat-label>Username</mat-label>
-                    <input matInput trim="blur" [placeholder]="'Username'" [formControlName]="'username'">
+                    <mat-label>Giftcode</mat-label>
+                    <input matInput trim="blur" [placeholder]="'Giftcode'" [formControlName]="'giftcode'">
                 </mat-form-field>
 
                 <mat-form-field class="w-full" [floatLabel]="'always'">
-                    <mat-label>Họ và tên</mat-label>
-                    <input matInput trim="blur" [placeholder]="'Họ và tên'" [formControlName]="'fullname'">
+                    <mat-label>Giftname</mat-label>
+                    <input matInput trim="blur" [placeholder]="'Giftname'" [formControlName]="'giftname'">
                 </mat-form-field>
 
                 <mat-form-field class="w-full" [floatLabel]="'always'">
-                    <mat-label>Ngày tạo</mat-label>
-                    <input matInput [matDatepicker]="dobDatePicker"
-                           [placeholder]="'Ngày tạo'"
-                           [formControlName]="'createdDate'">
-                    <mat-datepicker-toggle matSuffix [for]="dobDatePicker"></mat-datepicker-toggle>
-                    <mat-datepicker #dobDatePicker></mat-datepicker>
-                </mat-form-field>
-
-                <mat-form-field class="w-full" [floatLabel]="'always'">
-                    <mat-label>Số điện thoại</mat-label>
-                    <input matInput trim="blur" [placeholder]="'Số điện thoại'" [formControlName]="'phone'">
-                    <mat-error *ngIf="searchForm.get('phone').hasError('pattern')">
-                        Số điện thoại sai định dạng
+                    <mat-label>Describe</mat-label>
+                    <input matInput trim="blur" [placeholder]="'Describle'" [formControlName]="'describe'">
+                    <mat-error *ngIf="searchForm.get('describe').hasError('pattern')">
+                        Không có mô tả
                     </mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="w-full" [floatLabel]="'always'">
-                    <mat-label>Email</mat-label>
-                    <input matInput trim="blur" [placeholder]="'Email'" [formControlName]="'email'">
-                    <mat-error *ngIf="searchForm.get('email').hasError('email')">
-                        Email sai định dạng
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="w-full" [floatLabel]="'always'">
-                    <mat-label>Địa chỉ</mat-label>
-                    <input matInput trim="blur" [placeholder]="'Địa chỉ'" [formControlName]="'address'">
                 </mat-form-field>
 
                 <mat-form-field class="w-full" [floatLabel]="'always'">
@@ -59,15 +37,15 @@
                     </mat-select>
                 </mat-form-field>
 
-                <button
-                    mat-flat-button
-                    class="self-center w-32 justify-self-end"
-                    (click)="doSearch()"
-                    [color]="'primary'">
-                    <mat-icon [svgIcon]="'heroicons_outline:search'"></mat-icon>
-                    <span class="ml-2 mr-1">Tìm kiếm</span>
-                </button>
             </form>
+            <button
+                mat-flat-button
+                class="self-center w-32 justify-self-end"
+                (click)="doSearch()"
+                [color]="'primary'">
+                <mat-icon [svgIcon]="'heroicons_outline:search'"></mat-icon>
+                <span class="ml-2 mr-1">Tìm kiếm</span>
+            </button>
         </mat-expansion-panel>
     </mat-accordion>
 
@@ -94,45 +72,33 @@
                         <mat-progress-bar *ngIf="isLoadingGrid" [mode]="'indeterminate'"></mat-progress-bar>
                     </div>
                     <table class="min-w-240 overflow-y-visible" mat-table [dataSource]="dataSource" matSort>
-                        <!-- Username Column -->
-                        <ng-container matColumnDef="username">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Username</th>
+                        <!-- Giftcode Column -->
+                        <ng-container matColumnDef="giftcode">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã giải thưởng</th>
                             <td mat-cell *matCellDef="let element">
-                                <span class="text-primary-500">{{element.username}}</span>
+                                <span class="text-primary-500">{{element.giftcode}}</span>
                             </td>
                         </ng-container>
 
-                        <!-- Email Column -->
-                        <ng-container matColumnDef="email">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email</th>
-                            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                        <!-- Giftname Column -->
+                        <ng-container matColumnDef="giftname">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên giải thưởng</th>
+                            <td mat-cell *matCellDef="let element"> {{element.giftname}} </td>
                         </ng-container>
 
-                        <!-- Fullname Column -->
-                        <ng-container matColumnDef="fullname">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Họ và tên</th>
-                            <td mat-cell *matCellDef="let element"> {{element.fullname}} </td>
-                        </ng-container>
-
-                        <!-- Phone Column -->
-                        <ng-container matColumnDef="phone">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Số điện thoại</th>
-                            <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+                        <!-- Describe Column -->
+                        <ng-container matColumnDef="giftcode">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Mô tả</th>
+                            <td mat-cell *matCellDef="let element"> {{element.describe}} </td>
                         </ng-container>
 
                         <!-- Status Column -->
                         <ng-container matColumnDef="status">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Trạng thái</th>
                             <td mat-cell *matCellDef="let element">
-                                <span *ngIf="element.status == 'ACTIVE'" class="text-green-500">Hoạt động</span>
-                                <span *ngIf="element.status == 'LOCKING'" class="text-red-500">Đang khóa</span>
+                                <span *ngIf="element.status == 'ACTIVE'" class="text-green-500">Đã quay thưởng</span>
+                                <span *ngIf="element.status == 'NOT ACTIVE'" class="text-red-500">Chưa quay thưởng</span>
                             </td>
-                        </ng-container>
-
-                        <!-- Address Column -->
-                        <ng-container matColumnDef="address">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Địa chỉ</th>
-                            <td mat-cell *matCellDef="let element"> {{element.address}} </td>
                         </ng-container>
 
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

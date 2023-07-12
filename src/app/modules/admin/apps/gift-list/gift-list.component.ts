@@ -8,9 +8,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import {Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {MatSelectModel} from "../../../../shared/model/common/mat-select.model";
-import {REGEX, RESPONSE_CODE, tableState} from "../../../../shared/constants/app.constants";
+import {RESPONSE_CODE, tableState} from "../../../../shared/constants/app.constants";
 import {convertMo2DateStr} from "../../../../shared/utils/app-utils.functions";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
@@ -33,7 +33,7 @@ export class GiftListComponent implements OnInit, OnDestroy, AfterViewInit {
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-    displayedColumns: string[] = ['username', 'email', 'fullname', 'phone', 'status', 'address'];
+    displayedColumns: string[] = ['giftcode', 'giftname', 'describe', 'status'];
     dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
     isLoadingGrid: boolean = false;
 
@@ -47,11 +47,11 @@ export class GiftListComponent implements OnInit, OnDestroy, AfterViewInit {
         },
         {
             appCode: 'ACTIVE',
-            appName: 'Hoạt động'
+            appName: 'ĐÃ QUAY THƯỞNG'
         },
         {
-            appCode: 'LOCKING',
-            appName: 'Đang khóa'
+            appCode: 'NOT ACTIVE',
+            appName: 'CHƯA QUAY THƯỞNG'
         }
     ];
 
@@ -85,12 +85,9 @@ export class GiftListComponent implements OnInit, OnDestroy, AfterViewInit {
 
     buildSearchForm() {
         this.searchForm = this._formBuilder.group({
-            username: [''],
-            fullname: [''],
-            createdDate: [''],
-            phone: ['', [Validators.pattern((REGEX.PHONE_NUMBER))]],
-            email: ['', [Validators.email]],
-            address: [''],
+            giftcode: [''],
+            giftname: [''],
+            describe: [''],
             status: ['']
         });
     }
