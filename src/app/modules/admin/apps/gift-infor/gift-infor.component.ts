@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component, ViewEncapsulation} from '@angular/core';
 
 @Component({
-    selector: 'app-gift-information',
-    templateUrl: './gift-information.component.html',
-    styleUrls: ['./gift-information.component.scss']
+    selector: 'gift-infor',
+    templateUrl: 'gift-infor.component.html',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GiftInformationComponent {
+export class GiftInforComponent {
     giftCode: string;
     giftName: string;
     giftDescription: string;

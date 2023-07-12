@@ -77,6 +77,10 @@ export const appRoutes: Route[] = [
         },
         children   : [
 
+            //Gift
+            {path: 'gift-infor', loadChildren: () => import('app/modules/admin/apps/gift-infor/gift-infor.module').then(m => m.GiftInforModule)},
+            {path: 'gift-list', loadChildren: () => import('app/modules/admin/apps/gift-list/gift-list.module').then(m => m.GiftListModule)},
+
             // Dashboards
             {path: 'dashboards', children: [
                 {path: 'project', loadChildren: () => import('app/modules/admin/dashboards/project/project.module').then(m => m.ProjectModule)},

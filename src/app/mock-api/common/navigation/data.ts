@@ -3,20 +3,21 @@ import {FuseNavigationItem} from '@fuse/components/navigation';
 
 export const defaultNavigation: FuseNavigationItem[] = [
     {
-        id: 'apps.gift.manage',
+        id: 'apps.gift-infor',
         title: 'Thông tin phần thưởng',
         type: 'basic',
         icon: 'heroicons_outline:gift',
-        link: 'app-gift-information'
+        link: '/gift-infor'
     },
     {
-        id: 'apps.employee.manage',
+        id: 'apps.gift-list',
         title: 'Danh sách phần thưởng',
         type: 'basic',
         icon: 'heroicons_outline:gift',
-        link: '/apps/employee-manage'
+        link: '/gift-list'
     },
-    {
+
+    /*{
         id: 'dashboards',
         title: 'Dashboards',
         subtitle: 'Unique dashboard designs',
@@ -62,7 +63,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         children: [
             {
                 id: 'apps.gift.manage',
-                title: 'QL Phần thưởng',
+                title: '\QL Phần thưởng',
                 type: 'basic',
                 icon: 'heroicons_outline:gift',
                 link: '/apps/gift-manage'
@@ -1185,7 +1186,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 type: 'basic'
             }
         ]
-    }
+    }*/
 ];
 export const compactNavigation: FuseNavigationItem[] = [
     {
