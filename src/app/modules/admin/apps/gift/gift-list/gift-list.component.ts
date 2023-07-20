@@ -9,23 +9,26 @@ import {
 } from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {MatSelectModel} from "../../../../shared/model/common/mat-select.model";
-import {RESPONSE_CODE, tableState} from "../../../../shared/constants/app.constants";
-import {convertMo2DateStr} from "../../../../shared/utils/app-utils.functions";
+import {MatSelectModel} from "../../../../../shared/model/common/mat-select.model";
+import {RESPONSE_CODE, tableState} from "../../../../../shared/constants/app.constants";
+import {convertMo2DateStr} from "../../../../../shared/utils/app-utils.functions";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {GiftListService} from "./gift-list.service";
-import {AppPagination} from "../../../../shared/model/common/app.pagination";
+import {AppPagination} from "../../../../../shared/model/common/app.pagination";
 import {finalize, takeUntil} from "rxjs/operators";
-import {AppTableState} from "../../../../shared/model/common/app-table.state";
+import {AppTableState} from "../../../../../shared/model/common/app-table.state";
 import {MatSort, Sort} from "@angular/material/sort";
 import {Subject} from "rxjs";
+import {MatDialog, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import {GiftInforComponent} from "../gift-infor/gift-infor.component";
 
 @Component({
     selector: 'gift-list',
     templateUrl: 'gift-list.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GiftListComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -33,7 +36,7 @@ export class GiftListComponent implements OnInit, OnDestroy, AfterViewInit {
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-    displayedColumns: string[] = ['giftcode', 'giftname', 'describe', 'status'];
+    displayedColumns: string[] = ['giftcode', 'giftname', 'describe', 'status', 'actions'];
     dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
     isLoadingGrid: boolean = false;
 
@@ -55,13 +58,11 @@ export class GiftListComponent implements OnInit, OnDestroy, AfterViewInit {
         }
     ];
 
-    /**
-     * Constructor
-     */
     constructor(
         private _formBuilder: FormBuilder,
         private _router: Router,
-        private _giftListService: GiftListService
+        private _giftListService: GiftListService,
+        public dialog: MatDialog,
     ) {
     }
 
@@ -128,5 +129,40 @@ export class GiftListComponent implements OnInit, OnDestroy, AfterViewInit {
     ngOnDestroy(): void {
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
+    }
+
+    openDialog(): void {
+        const dialogRef = this.dialog.open(GiftInforComponent);
+
+        // Lắng nghe sự kiện đóng dialog và xử lý sau khi dialog được đóng
+        dialogRef.afterClosed().subscribe((result: any) => {
+            // Xử lý sau khi dialog được đóng (ví dụ: tải lại danh sách phần thưởng)
+            if (result) {
+                // Có thể gọi service để tải lại danh sách phần thưởng (nếu cần)
+                this.doSearch();
+            }
+        });
+    }
+
+
+    editGift(element: any) {
+        // Xử lý logic sửa ở đây
+        console.log('Đã chọn sửa:', element);
+        // Ví dụ: Chuyển đến trang sửa gift với mã giftcode
+        // this._router.navigate(['/edit-gift', element.giftcode]);
+    }
+
+    deleteGift(element: any) {
+        // Xử lý logic xóa ở đây
+        console.log('Đã chọn xóa:', element);
+        // Ví dụ: Gọi service để xóa gift với mã giftcode
+        // this._giftListService.deleteGift(element.giftcode).subscribe((response) => {
+        //     // Xử lý kết quả trả về sau khi xóa
+        //     if (response.success) {
+        //         // Hiển thị thông báo xóa thành công
+        //     } else {
+        //         // Hiển thị thông báo xóa thất bại hoặc xử lý lỗi
+        //     }
+        // });
     }
 }

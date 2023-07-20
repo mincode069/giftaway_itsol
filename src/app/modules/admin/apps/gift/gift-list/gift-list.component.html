@@ -10,6 +10,7 @@
             <form class="grid lg:grid-cols-4 sm:grid-cols-2 gap-4" [formGroup]="searchForm">
                 <mat-form-field class="w-full" [floatLabel]="'always'">
                     <mat-label>Giftcode</mat-label>
+                    <mat-label>Giftcode</mat-label>
                     <input matInput trim="blur" [placeholder]="'Giftcode'" [formControlName]="'giftcode'">
                 </mat-form-field>
 
@@ -21,9 +22,6 @@
                 <mat-form-field class="w-full" [floatLabel]="'always'">
                     <mat-label>Describe</mat-label>
                     <input matInput trim="blur" [placeholder]="'Describle'" [formControlName]="'describe'">
-                    <mat-error *ngIf="searchForm.get('describe').hasError('pattern')">
-                        Không có mô tả
-                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="w-full" [floatLabel]="'always'">
@@ -60,8 +58,12 @@
                     <button
                         mat-flat-button
                         class="ml-4"
-                        [color]="'primary'">
-                        <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                        [color]="'primary'"
+                        mat-raised-button
+                        (click)="openDialog()">
+                        <mat-icon
+                            [svgIcon]="'heroicons_outline:plus'"
+                        ></mat-icon>
                         <span class="ml-2 mr-1">Thêm mới</span>
                     </button>
                 </div>
@@ -87,7 +89,7 @@
                         </ng-container>
 
                         <!-- Describe Column -->
-                        <ng-container matColumnDef="giftcode">
+                        <ng-container matColumnDef="describe">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>Mô tả</th>
                             <td mat-cell *matCellDef="let element"> {{element.describe}} </td>
                         </ng-container>
@@ -98,6 +100,18 @@
                             <td mat-cell *matCellDef="let element">
                                 <span *ngIf="element.status == 'ACTIVE'" class="text-green-500">Đã quay thưởng</span>
                                 <span *ngIf="element.status == 'NOT ACTIVE'" class="text-red-500">Chưa quay thưởng</span>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="actions">
+                            <th mat-header-cell *matHeaderCellDef>Thao tác</th>
+                            <td mat-cell *matCellDef="let element">
+                                <button mat-icon-button (click)="editGift(element)">
+                                    <mat-icon aria-label="Sửa">edit</mat-icon>
+                                </button>
+                                <button mat-icon-button (click)="deleteGift(element)">
+                                    <mat-icon aria-label="Xóa">delete</mat-icon>
+                                </button>
                             </td>
                         </ng-container>
 

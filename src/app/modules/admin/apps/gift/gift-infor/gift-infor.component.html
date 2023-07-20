@@ -1,16 +1,18 @@
 <div class="gift-infor flex flex-col h-full w-full mr-3">
-    <div class="flex justify-between items-center bg-blue-500 rounded p-4">
-        <div class="text-xl font-bold">Thông tin phần thưởng</div>
+    <div class="flex justify-between items-center bg-primary rounded p-4">
+        <div class="text-xl text-white font-bold">Thông tin phần thưởng</div>
         <button class="text-gray-600 hover:text-gray-900">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="rou   nd" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
     </div>
     <div class="flex-grow flex justify-center items-center">
         <div class="flex flex-col items-center w-1/2">
-            <div class="h-64 w-64 bg-gray-200"></div>
-            <button class="bg-blue-500 text-white px-4 py-2 rounded mt-4" (click)="fileInput.click()">Tải ảnh lên</button>
+            <!-- Hiển thị ảnh -->
+            <div class="h-64 w-64 bg-gray-200" *ngIf="!giftImage">no image</div>
+            <img [src]="giftImage" *ngIf="giftImage" class="h-64 w-64 rounded">
+            <button class="bg-primary text-white px-4 py-2 rounded mt-4" (click)="fileInput.click()">Tải ảnh lên</button>
             <input type="file" class="hidden" #fileInput (change)="handleImageUpload($event)">
         </div>
         <div class="flex flex-col w-1/2">
@@ -24,11 +26,11 @@
             </div>
             <div class="form-field">
                 <label class="font-bold">Mô tả</label>
-                <textarea class="border border-gray-300 rounded p-2 w-full" [(ngModel)]="giftDescription"></textarea>
+                <textarea class="border border-gray-300 rounded p-2 w-full" [(ngModel)]="giftDescribe"></textarea>
             </div>
         </div>
     </div>
     <div class="flex justify-end p-4">
-        <button class="bg-blue-500 text-white px-4 py-2 rounded">Lưu</button>
+        <button class="bg-primary text-white px-4 py-2 rounded" (click)="save()">Lưu</button>
     </div>
 </div>

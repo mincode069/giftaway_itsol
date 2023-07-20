@@ -17,7 +17,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         link: '/gift-list'
     },
 
-    {
+    /*{
         id: 'dashboards',
         title: 'Dashboards',
         subtitle: 'Unique dashboard designs',
@@ -1186,7 +1186,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 type: 'basic'
             }
         ]
-    }
+    }*/
 ];
 export const compactNavigation: FuseNavigationItem[] = [
     {
