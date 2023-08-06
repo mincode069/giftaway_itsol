@@ -1,5 +1,6 @@
-import {ChangeDetectionStrategy, Component, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation} from '@angular/core';
 import { GiftService } from '../gift.service';
+import {MatDialogRef} from "@angular/material/dialog";
 @Component({
     selector: 'gift-infor',
     templateUrl: 'gift-infor.component.html',
@@ -13,7 +14,7 @@ export class GiftInforComponent {
     giftImage: string;
     // Add other properties and methods as needed
 
-    constructor(private giftService: GiftService) {}
+    constructor(private giftService: GiftService, private cdr: ChangeDetectorRef, private ref: MatDialogRef<GiftInforComponent>) {}
 
 
     handleImageUpload(event: any): void {
@@ -22,6 +23,7 @@ export class GiftInforComponent {
             const reader = new FileReader();
             reader.onload = (e: any) => {
                 this.giftImage = e.target.result;
+                this.cdr.detectChanges();
             };
             reader.readAsDataURL(file);
         }
@@ -40,5 +42,9 @@ export class GiftInforComponent {
 
         // Gọi service để thêm phần thưởng mới vào danh sách
         this.giftService.addGift(giftData);
+    }
+
+    closeDialog(): void {
+        this.ref.close();
     }
 }
