@@ -1,6 +1,8 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation} from '@angular/core';
 import { GiftService } from '../gift.service';
 import {MatDialogRef} from "@angular/material/dialog";
+import {RESPONSE_CODE} from "../../../../../shared/constants/app.constants";
+import {GiftListService} from "../gift-list/gift-list.service";
 @Component({
     selector: 'gift-infor',
     templateUrl: 'gift-infor.component.html',
@@ -17,7 +19,8 @@ export class GiftInforComponent {
     constructor(
         private giftService: GiftService,
         private cdr: ChangeDetectorRef,
-        private ref: MatDialogRef<GiftInforComponent>
+        private ref: MatDialogRef<GiftInforComponent>,
+        private _giftService: GiftListService
     ) {}
 
 
@@ -43,12 +46,14 @@ export class GiftInforComponent {
 
         console.log('Thông tin phần thưởng:', giftData);
 
-        // Gọi service để thêm phần thưởng mới vào danh sách
-        this.giftService.addGift(giftData);
+        this._giftService.save(giftData).subscribe((response) => {
+                if (RESPONSE_CODE.SUCCESS === response.code && response.data) {
+                    this.closeDialog('success');
+                }
+            });
     }
 
-
-    closeDialog(): void {
-        this.ref.close();
+    closeDialog(message?): void {
+        this.ref.close(message);
     }
 }
