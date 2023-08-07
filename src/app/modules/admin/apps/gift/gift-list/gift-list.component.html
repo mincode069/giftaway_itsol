@@ -10,7 +10,6 @@
             <form class="grid lg:grid-cols-4 sm:grid-cols-2 gap-4" [formGroup]="searchForm">
                 <mat-form-field class="w-full" [floatLabel]="'always'">
                     <mat-label>Giftcode</mat-label>
-                    <mat-label>Giftcode</mat-label>
                     <input matInput trim="blur" [placeholder]="'Giftcode'" [formControlName]="'giftcode'">
                 </mat-form-field>
 
@@ -78,28 +77,28 @@
                         <ng-container matColumnDef="giftcode">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã giải thưởng</th>
                             <td mat-cell *matCellDef="let element">
-                                <span class="text-primary-500">{{element.giftcode}}</span>
+                                <span class="text-primary-500">{{element.code}}</span>
                             </td>
                         </ng-container>
 
                         <!-- Giftname Column -->
                         <ng-container matColumnDef="giftname">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên giải thưởng</th>
-                            <td mat-cell *matCellDef="let element"> {{element.giftname}} </td>
+                            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
                         </ng-container>
 
                         <!-- Describe Column -->
                         <ng-container matColumnDef="describe">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>Mô tả</th>
-                            <td mat-cell *matCellDef="let element"> {{element.describe}} </td>
+                            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
                         </ng-container>
 
                         <!-- Status Column -->
                         <ng-container matColumnDef="status">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Trạng thái</th>
                             <td mat-cell *matCellDef="let element">
-                                <span *ngIf="element.status == 'ACTIVE'" class="text-green-500">Đã quay thưởng</span>
-                                <span *ngIf="element.status == 'NOT ACTIVE'" class="text-red-500">Chưa quay thưởng</span>
+                                <span *ngIf="element.status == 'CREATED'" class="text-green-500">Đã tạo</span>
+                                <span *ngIf="element.status == 'NOT CREATED'" class="text-red-500">Chưa tạo</span>
                             </td>
                         </ng-container>
 

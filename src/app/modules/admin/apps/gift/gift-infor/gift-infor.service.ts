@@ -16,7 +16,7 @@ export class GiftInforService {
     constructor(private _httpClient: HttpClient) {
     }
 
-    doSearch(obj: AppPagination<any>): Observable<AppResponse<AppPagination<any>>> {
-        return this._httpClient.post<AppResponse<AppPagination<any>>>(`${environment.API_URL}/user-info/search`, obj);
+    save(obj: AppPagination<any>): Observable<AppResponse<AppPagination<any>>> {
+        return this._httpClient.post<AppResponse<AppPagination<any>>>(`${environment.API_URL}/gift/save`, obj);
     }
 }

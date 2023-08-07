@@ -14,7 +14,11 @@ export class GiftInforComponent {
     giftImage: string;
     // Add other properties and methods as needed
 
-    constructor(private giftService: GiftService, private cdr: ChangeDetectorRef, private ref: MatDialogRef<GiftInforComponent>) {}
+    constructor(
+        private giftService: GiftService,
+        private cdr: ChangeDetectorRef,
+        private ref: MatDialogRef<GiftInforComponent>
+    ) {}
 
 
     handleImageUpload(event: any): void {
@@ -30,7 +34,6 @@ export class GiftInforComponent {
     }
 
     save(): void {
-        // Lưu thông tin nhập liệu và ảnh vào biến giftData (nếu bạn muốn sử dụng biến giftData)
         const giftData = {
             giftCode: this.giftCode,
             giftName: this.giftName,
@@ -43,6 +46,7 @@ export class GiftInforComponent {
         // Gọi service để thêm phần thưởng mới vào danh sách
         this.giftService.addGift(giftData);
     }
+
 
     closeDialog(): void {
         this.ref.close();

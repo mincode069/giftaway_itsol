@@ -1,12 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    Component,
-    OnDestroy,
-    OnInit,
-    ViewChild,
-    ViewEncapsulation
-} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {MatSelectModel} from "../../../../../shared/model/common/mat-select.model";
@@ -144,13 +136,40 @@ export class GiftListComponent implements OnInit, OnDestroy, AfterViewInit {
         });
     }
 
+    viewGift(element: any) {
+        this._giftListService.viewGift(element.giftcode).subscribe(response => {
+            if (response.success) {
+                const dialogRef = this.dialog.open(GiftInforComponent, {
+                    data: { giftData: response.data },
+                });
+
+                dialogRef.afterClosed().subscribe((result: any) => {
+                    if (result) {
+                        // Có thể gọi service để tải lại danh sách phần thưởng (nếu cần)
+                        this.doSearch();
+                    }
+                });
+            }
+        });
+    }
 
     editGift(element: any) {
-        // Xử lý logic sửa ở đây
-        console.log('Đã chọn sửa:', element);
-        // Ví dụ: Chuyển đến trang sửa gift với mã giftcode
-        // this._router.navigate(['/edit-gift', element.giftcode]);
+        this._giftListService.viewGift(element.giftcode).subscribe(response => {
+            if (response.success) {
+                const dialogRef = this.dialog.open(GiftInforComponent, {
+                    data: { giftData: response.data },
+                });
+
+                dialogRef.afterClosed().subscribe((result: any) => {
+                    if (result) {
+                        // Có thể gọi service để cập nhật thông tin phần thưởng (nếu cần)
+                        this.doSearch();
+                    }
+                });
+            }
+        });
     }
+
 
     deleteGift(element: any) {
         // Xử lý logic xóa ở đây
